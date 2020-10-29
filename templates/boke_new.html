@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+    发博客
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/boke_new.css?q=qqqw2">
+{% endblock %}
+
+{% block script %}
+    // 新博客添加
+    $('#boke-submit-btn').on('click',function(){
+        var title = $('#boke-new-title').val();
+        var text = $('#boke-new-text').val();
+        var datadirt = {'title':title, 'content':text};
+        var url = '/boke/add';
+        form_post(url, datadirt);});
+{% endblock %}
+
+{% block content %}
+<div class="edit-box boke-comment-box">
+    <div class="edit-title-box ">
+        <textarea id='boke-new-title' rows='1' class="Input-title textarea-grow" name="title" placeholder="请输入标题（最多 30 个字）"></textarea>
+    </div>
+    <div class="edit-toolbar top-1-pale bottom-1-pale fa-2x">
+        <i class="fa fa-bold" aria-hidden="true"></i>
+        <i class="fa fa-italic" aria-hidden="true"></i>
+        <i class="fa fa-underline" aria-hidden="true"></i>
+        <i class="fa fa-header" aria-hidden="true"></i>
+        <i class="fa fa-list-ol" aria-hidden="true"></i>
+        <i class="fa fa-list-ul" aria-hidden="true"></i>
+        <i class="fa fa-link" aria-hidden="true"></i>
+        <i class="fa fa-font" aria-hidden="true"></i>
+        <i class="fa fa-picture-o" aria-hidden="true"></i>
+        <i class="fa fa-video-camera" aria-hidden="true"></i>
+        <i class="fa fa-file" aria-hidden="true"></i>
+        <i class="fa fa-subscript" aria-hidden="true"></i>
+        <i class="fa fa-superscript" aria-hidden="true"></i>
+    </div>
+    <div class="edit-content" name="content">
+        <textarea id="boke-new-text" rows='7' class="Input-txt textarea-grow " placeholder="请输入正文"></textarea>
+    </div>
+    <button id="boke-submit-btn" type="button" name="button" class="boke-submit-btn">发布</button>
+</div>
+
+{% endblock %}
+
+
+{% block sidebar %}
+    <h1>hello </h1>
+<!--    <a href="/node/new">发布新帖子</a>-->
+{% endblock %}

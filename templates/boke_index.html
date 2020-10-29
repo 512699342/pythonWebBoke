@@ -1,0 +1,573 @@
+{% extends "base.html" %}
+
+
+
+{% block script %}
+        <!-- 判断当前评论是否已经有了回复框 -->
+        function is_exist_reply_send(obj){
+            var father = $(obj).closest('.con.reply-open');
+            <!-- $('body').css('background','red'); -->
+            return father[0] != undefined;
+        };
+        <!-- 删除其他回复评论的html -->
+         function del_other_reply_send(){
+             <!-- 删除html -->
+             $('.reply-open .comment-send').remove();
+             <!-- 删除其他回复框父元素的标记 -->
+             $('.con').removeClass('reply-open');
+         };
+        <!-- 在元素内，最后的位置，添加评论盒子的html -->
+        function add_reply_send(obj){
+            var send_content = $('#comment-send-copy').html();
+            var father = $(obj).closest('.con-content');
+            father.append(send_content);
+            <!-- 因为这里的添加是复制评论发送盒子的内容，因此需要进行初始化，防止将多余的内容复制到回复框 -->
+            father.find('textarea').css('height',77);
+            father.find('textarea').removeClass('error');
+        };
+        <!-- 设置相应的用户信息 -->
+        function set_user(obj){
+            var father = $(obj).parent();
+            var user_father = father.prevAll('.user');
+            var name  = user_father.children('a').text();
+            var text = '回复 ' + '@' + name;
+            var text_father = $(obj).closest('.con.reply-open');
+            var textarea = text_father.find('textarea');
+            textarea.attr('placeholder',text);
+        };
+        function insert_reply_send(obj){
+            if(is_exist_reply_send(obj)){
+                <!-- 添加textarea选中 -->
+                textarea_focus(obj);
+                <!-- 修改相应的用户信息 -->
+                set_user(obj);
+            }
+            else{
+                <!-- 删除其他回复框 -->
+                del_other_reply_send();
+                <!-- 添加回复框 -->
+                add_reply_send(obj);
+                <!-- 对父元素进行标记 -->
+                $(obj).closest('.con').addClass('reply-open');
+                <!-- 添加textarea选中 -->
+                textarea_focus(obj);
+                <!-- 设置相应的用户信息 -->
+                set_user(obj);
+            }
+
+        };
+        function set_position(cm,fa,wh,to,le){
+            var set_top = $(fa).offset().top - $(cm).offset().top + to;
+            var set_left = $(fa).offset().left -  $(cm).offset().left + le;
+            var box = $(wh);
+            box.css({'top':set_top,'left':set_left});
+        };
+        function set_other(wh){
+            var box = $(wh);
+            box.toggle();
+        }
+        <!-- 显示某些东西 -->
+        <!-- 输入参数：大元素，相对的元素，显示的元素，相对top顶点位置，相对left左的位置 -->
+        function show_something(cm,fa,wh,to,le){
+            <!-- 设置位置 -->
+            set_position(cm,fa,wh,to,le);
+            <!-- 显示 -->
+            set_other(wh);
+        }
+        <!-- 设置表情盒子位置，并显示或隐藏 -->
+        function show_emoji_box(obj){
+            <!-- 因为emoji-box设置的是绝对布局，因此要获取得到点击按钮相对于boke-comment-box的位置 -->
+            var common = $('.boke-comment-box');
+            var father = obj;
+            var who = $('.emoji-box');
+            var top = 30;
+            var left = 0;
+            show_something(common,father,who,top,left);
+        };
+        function del_textarea_focus(){
+            $('textarea.focus').removeClass('focus');
+        };
+        <!-- 为textarea添加选中，显示光标位置 -->
+        function textarea_focus(obj){
+            del_textarea_focus();
+            var textarea = $(obj).closest('.hasTextarea').find('textarea');
+            textarea.addClass('focus');
+            textarea.focus();
+        };
+        <!-- 点击回复，添加回复框 -->
+        $('.reply-button').on('click',function(){
+            <!-- 插入回复框的html -->
+            insert_reply_send(this);
+            <!-- 阻止冒泡事件 -->
+            event.stopPropagation();
+        });
+        <!-- 插入文本到textarea指定位置 -->
+        function insertText(obj,str) {
+            if (document.selection) {
+                var sel = document.selection.createRange();
+                sel.text = str;
+            } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+                var startPos = obj.selectionStart,
+                    endPos = obj.selectionEnd,
+                    cursorPos = startPos,
+                    tmpStr = obj.value;
+                obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+                cursorPos += str.length;
+                obj.selectionStart = obj.selectionEnd = cursorPos;
+            } else {
+                obj.value += str;
+            }
+        };
+        <!-- 二维码显示隐藏的效果 -->
+        $('.reward-button').on('click',function(){$('.qr-code').toggle();});
+        <!-- --------------------------分割线----------------------------- -->
+        <!-- 点击评论文本框，添加选中效果 -->
+        $('.boke-comment-box').on('click','.textarea-grow',function(){
+            $('.textarea-grow').removeClass('focus');
+            $(this).addClass('focus');
+            event.stopPropagation();});
+        <!-- 弹出和隐藏表情包盒子的效果 -->
+        <!-- 点击表情按钮，显示弹出层，为评论框添加选中效果 -->
+        $('.boke-comment-box').on('click','.comment-emoji',function(){
+            <!-- 为textarea添加选中，显示光标位置 -->
+            textarea_focus(this);
+            <!-- 显示或隐藏表情盒子 -->
+            show_emoji_box(this);
+            <!-- 阻止冒泡事件 -->
+            event.stopPropagation();
+        });
+        <!--  点击其他区域，隐藏弹出层，取消评论框添加选中效果 -->
+        $(document).bind("click", function(){
+            $(".emoji-box").css("display", "none");
+            $('.textarea-grow').removeClass('focus');});
+        <!-- 给弹出层绑定点击事件，阻止冒泡,就是说点了该 内容，就不会将事件 -->
+        $(".emoji-box").bind("click", function(){
+            event.stopPropagation();//==========阻止冒泡2
+        })
+        <!-- 点击表情，添加到评论框的效果 -->
+        $('.emoji-wrap').on('click','a',function(){
+            <!-- 将jq对象转为dom对象，因为insertText函数使用的是dom对象 -->
+            var str = $(this).attr('data-emoji-text');
+            var textarea = $('textarea.focus')[0];
+            <!-- var textarea = $('.textarea-grow').get(0); -->
+            insertText(textarea, str);
+        });
+        <!-- 切换表情包组的选中效果 -->
+        $('.tab-link').on('click',function(){
+            $('.tab-link').removeClass('on');
+            $(this).addClass('on');
+        });
+        <!-- 快捷按钮，评论，收藏，点赞 -->
+        <!-- 评论按钮 -->
+        <!-- 快速跳动到评论页面 -->
+        $('#short-button-comment').on('click',function(){
+            var comment_box_height = $('.boke-comment-box').offset().top;
+            var n = 0;
+            var height_N = String(Number(comment_box_height) - n) +'px';
+            $('html,body').animate({scrollTop: height_N }, 300);
+        });
+        <!-- 收藏按钮 -->
+        <!-- 绑定收藏按钮事件 -->
+        $('#short-button-star').on('click',function(){
+            var bookID = $('#book_id').text();
+            var e = $("#short-button-star");
+            chang_success(e);
+            var success = function(response) {
+                //$('body').css('background','red');
+                //console.log('成功', arguments)
+                <!-- alert("收藏成功") -->
+            }
+            var error = function() {
+                console.log('错误', arguments)
+                alert("收藏失败")
+            }
+            api.star_add(bookID, success, error);
+        });
+        <!-- 收藏,点赞,评论数改变函数 -->
+        function chang_success(e){
+            var span  = $(e).children('span');
+            var flag = Number(span.attr('flag'));
+            var father = $(e);
+            father.toggleClass('color-blue-only');
+            var span_num = Number(span.text());
+            flag = -flag
+            span.attr('flag',String(flag))
+            span_num += flag;
+            span.text(span_num);
+        }
+        <!-- 收藏ajax -->
+        api.star_add = function(id, success, erro){
+            var url = '/api/book_star/' + id;
+            var form = {};
+            api.get(url, success, erro);
+        };
+
+        <!-- 点赞按钮 -->
+        <!-- 绑定点赞事件 -->
+        $('#short-button-thumbs').on('click',function(){
+            //ajxa
+            var bookID = $('#book_id').text();
+            var e = $('#short-button-thumbs');
+            if (!thumbs_vaild(e)){
+                alert('每次只能赞5个')
+                return ;
+            }
+            thumbs_chang(e);
+            var success = function(response) {
+                
+                console.log('成功', arguments)
+                //alert("收藏成功")
+            }
+            var error = function() {
+                console.log('错误', arguments)
+                //alert("收藏失败")
+            }
+            api.thumbs_add(bookID, success, error);
+        });
+        function thumbs_chang(e){
+            var father = e;
+            var span  = father.children('span');
+            var flag = Number(span.attr('flag'));
+            var span_num = Number(span.text());    
+            span_num += 1;
+            span.text(span_num);
+            span.attr('flag',String(flag+1));
+            father.addClass('color-blue-only'); 
+        }
+        <!-- ajax点赞添加 -->
+        api.thumbs_add = function(id, success, erro){
+            var url = '/api/book_thumb_add/' + id;
+            var form = {};
+            api.get(url, success, erro);
+        };
+        <!-- 点赞限制 -->
+        function thumbs_vaild(e){
+            var father = e;
+            var span  = father.children('span');
+            var flag = Number(span.attr('flag'));
+            //当前页面点赞限制
+            if (flag >= 0 && flag < 5){
+                return true;
+            }
+            else{
+                return false;
+            }
+            //页面改动
+        }
+
+        <!-- 发送评论按钮 -->
+        $('.boke-comment-box').on('click','.send-content button',function(){
+            comment_submit(this);
+            event.stopPropagation();
+        });
+        function comment_submit(e){
+            var texta = $(e).prev('textarea');
+            if (vaild_comment_submit(texta,e)){
+                error_show(texta,e);
+            }
+            else{
+                var success = function(response) {
+                
+                    console.log('成功', arguments)
+                    //alert("收藏成功")
+                }
+                var error = function() {
+                    console.log('错误', arguments)
+                    //alert("收藏失败")
+                }
+                api.comments_add(bookID, success, error);
+            }
+        }
+        <!-- 发送内容验证 -->
+        function vaild_comment_submit(tx,cl){
+            e = tx
+            fa = cl
+            if($(tx).val() == ''){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        <!-- 内容为空，错误提示 -->
+        function error_show(tx,cl){
+            e = tx
+            fa = cl
+            e.focus();
+            e.addClass('error');
+            show_err_tips(fa);
+        }
+        function show_err_tips(obj){
+            var common = $('.boke-comment-box');
+            var father = obj;
+            var who = $('.comment_submit_err');
+            var top = -55;
+            var left = -33;
+            $(who).show();
+            set_position(common,father,who,top,left);
+            <!-- 如果定时器为定义过，则初始化定义 -->
+            if (typeof hide_t == 'undefined')
+            {
+                hide_t = '';
+            }
+            <!-- 清除掉之前的计时器 -->
+            clearTimeout(hide_t);
+            <!-- 设置计时器，2秒后隐藏 -->
+            hide_t = setTimeout(function(){$(who).hide();},'2000');
+        }
+        <!-- 使用oninput事件，侦听元素内容发生变化时，立即执行函数 -->
+        $('.boke-comment-box').on('input','.send-content textarea',function(){
+            $(this).addClass('focus');
+            $(this).removeClass('error');
+        });
+
+        
+
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/boke.css?q=w7">
+<link rel="stylesheet" href="/static/css/boke_index.css?q=eeee2">
+{% endblock %}
+
+{% block content %}
+        <div class="boke-content-box">
+            <div class="boke-content-header">
+                <div class="boke-title">
+                        <span class="boke-title-content">【燕子集】57 端午节{{boke.title}}</span>
+                        <span id="book_id" hidden>{{boke.id}}</span>
+                </div>
+                <div class="boke-time-tag a-bottom-1">
+                        <span class="meta-item">
+                            <span class="icon-pr-3x"><i class="fa fa-calendar-o"></i></span>
+                            <span>发表于</span>
+                            <span><time>{{boke.created_time}}</time></span>
+                        </span>
+                        <span class="meta-item">
+                            <span class="icon-pr-3x"><i class="fa fa-folder-o"></i></span>
+                            <span>分类于</span>
+                            <span>
+                                <a href="#">
+                                    朝花夕拾
+                                </a>
+                            </span>
+                        </span>
+                        <span class="meta-item">
+                            <span class="icon-pr-3x"><i class="fa fa-eye"></i></span>
+                            <span>阅读次数：</span>
+                            <span>{{boke.see_num}}</span>
+                        </span>
+                </div>
+            </div>
+            <div class="boke-content-body">
+                <p>{{boke.content}}</p>
+                <p>第二段</p>
+            </div>
+            <div class="boke-related">
+                <div class="related-header bottom-1-pale">相关文章</div>
+                <div class="related-body a-bottom-1 ">
+                    <ul class="ul-li-left">
+                        <li><a href="#">【燕子集】05 端午</a></li>
+                        <li><a href="#">【燕子集】06 端午</a></li>
+                        <li><a href="#">【燕子集】07 端午</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="reward-container">
+                <div class="reward-button">打赏</div>
+                <div class="qr-code" style="display: none;">
+                     <span>
+                         <img src="\static\img\apple-touch-icon.png" alt="weixin-qr">
+                         <p>微信</p>
+                     </span>
+                    <span>
+                        <img src="\static\img\apple-touch-icon.png" alt="zhifubao-qr">
+                        <p>支付宝</p>
+                    </span>
+                </div>
+            </div>
+            <div class="copyright a-bottom-1">
+                <ul class="copyrigh-ul">
+                    <li>
+                        <strong>本文作者：</strong>
+                        <span>{{boke.user.username}}</span>
+                    </li>
+                    <li>
+                        <strong>本文链接：</strong>
+                        <a href="{{url_for('boke.show',id=boke.id)}}">http://localhost:3000/boke/{{boke.id}}</a>
+                    </li>
+                    <li class="post-copyright-license">
+                        <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+                      </li>
+                </ul>
+            </div>
+            <div class="tags-box">
+                <a href="#"># 云南</a>
+                <a href="#"># 端午</a>
+            </div>
+            <div class="prev-next top-1-pale">
+                <div class="prev">
+                    <a href="#">
+                        <i class="fa fa-chevron-left"></i>
+                        <span> 【燕子集】64 探险家</span>
+                    </a>
+                </div>
+                <div class="next">
+                    <a href="#">
+                        <span> 【燕子集】65 有趣的女人</span>
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="boke-comment-box top-1-pale" >
+            <!-- 发送评论的盒子 -->
+            <div id="comment-send-copy">
+                <div class="comment-send hasTextarea">
+                    <div class="send-content">
+                        <img class="user-head" src="/static/img/noface.jpg@52w_52h.webp" alt="user_face">
+                        <textarea cols="80" name="msg" rows="5" placeholder="发条友善的评论" class="ipt-txt textarea-grow"></textarea>
+                        <button type="submit" class="comment-submit">发表评论</button>
+                    </div>
+                    <div class="comment-emoji">
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                        <span class="text">表情</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 发表评论表情包盒子 -->
+            <div class="emoji-box" style="display:none">
+                    <div class="emoji-title">
+                        <span>小黄狗</span>
+                    </div>
+                    <div class="emoji-wrap">
+                        <a class="emoji-text emoji-small" data-emoji-text="[狗头]" data-pid="1" data-id="1">
+                            <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp" title="[狗头]">
+                        </a>
+                        <a class="emoji-text emoji-small" data-emoji-text="[狗头2]" data-pid="1" data-id="2">
+                            <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp" title="[狗头2]">
+                        </a>
+                    </div>
+                    <div class="emoji-tabs">
+                        <div class="emoji-container">
+                            <div class="emoji-tab-wrap clearfix">
+                                <a class="tab-link on" data-index="0" data-pid="1">
+                                    <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp">
+                                </a>
+                                <a class="tab-link" data-index="0" data-pid="1">
+                                    <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp">
+                                </a>
+                            </div>
+                         </div>
+                    </div>
+            </div>
+            <!-- 评论提示盒子 -->
+            <div class="index_other">
+                <div class="mini comment_submit_err" hidden>
+                    你还没有评论
+                </div>
+            </div>
+            <!-- 评论内容盒子 -->
+            <div class="comment-list">
+                <div class="con hasTextarea">
+                    <div class="user-face">
+                        <a href="#">
+                            <img src="/static/img/noface.jpg@52w_52h.webp" alt="user_face" class="user-head ab-lt">
+                        </a>
+                    </div>
+                    <div class="con-content top-1-pale">
+                        <div class="user">
+                            <a href="#" class="name vip-red-name">暗猫の祝福</a>
+                        </div>
+                        <p class="text">新婚快乐！？</p>
+                        <div class="con-info hover-color-blue">
+                            <span class="plad">
+                                来自
+                                <a href="#" class="">iOS客户端</a>
+                            </span>
+                            <span class="time">2020-05-18 11:32</span>
+                            <span class="like">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                <span>1</span>
+                            </span>
+                            <span class="hate">
+                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                            </span>
+                            <span class="reply-button hover-color-blue-only hover-background-gray">回复</span>
+                        </div>
+                        <div class="reply-box">
+                            <div class="reply-item">
+                                <div class="reply-face-box">
+                                    <a href="#">
+                                        <img src="/static/img/noface.jpg@52w_52h.webp" alt="user_face" class="reply-face">
+                                    </a>
+                                </div>
+                                <div class="user">
+                                     <a href="#" class="name hover-color-blue-only">叶风浅</a>
+                                     <span class="reply-text"> 回复 <a href="#" class="color-blue-only hover-coler-red-only">@碧落げ黄泉</a> :畜牲，你中了甚么 <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp" class="reply-img-small" alt=""></span>
+                                </div>
+                                <div class="con-info hover-color-blue">
+                                    <span class="time">2020-05-19 9:27</span>
+                                    <span class="like">
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                        <span>1</span>
+                                    </span>
+                                    <span class="hate">
+                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="reply-button hover-color-blue-only hover-background-gray">回复</span>
+                                </div>
+                            </div>
+                            <div class="reply-item">
+                                <div class="reply-face-box">
+                                    <a href="#">
+                                        <img src="/static/img/35f83e16eca6018ea37960e3f0f9765384840c03.jpg@52w_52h.webp" alt="user_face" class="reply-face">
+                                    </a>
+                                </div>
+                                <div class="user">
+                                    <a href="#" class="name">碧落げ黄泉</a>
+                                    <span class="reply-text">我中了</span>
+                                </div>
+                                <div class="con-info hover-color-blue">
+                                    <span class="time">2020-05-18 11:32</span>
+                                    <span class="like">
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                        <span>1</span>
+                                    </span>
+                                    <span class="hate">
+                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="reply-button hover-color-blue-only hover-background-gray">回复</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="paging-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="article-actions ">
+            <div class="article-actions_item bottom-1-pale" id="short-button-comment">
+                <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                <span>{{boke.comments|length}}</span>
+            </div>
+            <div class="article-actions_item bottom-1-pale" id="short-button-star" >
+                <i class="fa fa-star-o" aria-hidden="true"></i>
+                <span>{{boke.star_num}}</span>
+                <i id="star_flag" hidden>{{s_f}}</i>
+            </div>
+            <div class="article-actions_item " id="short-button-thumbs">
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                <span flag="0">{{boke.thumbs}}</span>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}

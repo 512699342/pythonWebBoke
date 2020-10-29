@@ -1,0 +1,454 @@
+/* boke的头部信息：标题，发布时间，分类，浏览数 */
+.boke-content-header
+{
+    text-align: center;
+}
+/* 发布时间，分类，浏览数于其他标签的间距 */
+.boke-time-tag
+{
+    margin: 0px 0px 40px 0px;
+}
+/* boke的内容 */
+.boke-content-body{
+    text-align: justify;
+}
+/* boke的每一个段落 */
+.boke-content-body p{
+    margin:0 0 20px;
+}
+/* 相关推荐的box */
+.related-header{
+    margin: 60px 0 10px;
+    padding-bottom: 1px;
+    font-size: 1.125em;
+}
+/* 相关推介的ul */
+.ul-li-left
+{
+    display: flex;
+    padding: 0;
+}
+/* 相关推介的li */
+.ul-li-left li
+{
+    margin-left: 2em;
+    font-size: 0.875em;
+}
+/* 打赏容器 */
+.reward-container
+{
+    margin: 20px auto;
+    padding: 10px 0;
+    text-align: center;
+    width: 90%;
+}
+/* 打赏按钮 */
+.reward-button{
+    display: inline-block;
+    background: #ff2a2a;
+    color: #fff;
+    width:62px;
+    height:32px;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 2;
+    padding: 0 15px;
+    vertical-align: text-top;
+    font-family: inherit;
+    font-size: 100%;
+}
+.reward-button:hover{
+    opacity: 0.8;
+}
+/* 打赏二维码容器 */
+.qr-code{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+/* 打赏二维码图片 */
+.qr-code img{
+    margin: 0.8em 2em 0 2em;
+    max-width: 100%;
+    width: 180px;
+}
+/* 版权说明列表 */
+.copyrigh-ul{
+    background: #f5f5f5;
+    border-left: 3px solid #ff2a2a;
+    list-style: none;
+    margin: 2em 0 0;
+    padding: 0.5em 1em;
+}
+/* 标签列表 */
+.tags-box{
+    margin: 40px 0px;
+    text-align: left;
+}
+.tags-box a {
+    background: #f5f5f5;
+    border-bottom: none;
+    padding: 1px 5px;
+    margin-right: 10px;
+    font-size: 0.8125em;
+    display: inline-block;
+}
+.tags-box a:hover{
+    background: #ccc;
+}
+/* 上一个和下一个的容器 */
+.prev-next{
+    margin: 40px 0px;
+    padding: 10px 5px 0px;
+    font-size: 0.875em;
+    line-height: 1.6;
+    /* 子元素用到float后,使得子元素可以撑开父元素 */
+    overflow: auto;
+}
+/* 上一个 */
+.prev{
+    float:left;
+}
+/* 下一个 */
+.next{
+    float: right;
+}
+
+
+/* ------------------------------------------------------------------------------------------ */
+/* 评论部分 */
+/* 总的评论盒子 */
+.boke-comment-box{
+    position: relative;
+    padding-top: 40px;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 发送评论的盒子 */
+.comment-send {
+    margin: 10px 0px;
+}
+.send-content
+{
+    display: flex;
+    align-items: center;
+}
+/* 发表评论的用户头像 */
+.user-head{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.send-content img{
+    margin-right: 36px;
+}
+/* 发表评论的输入框 */
+.ipt-txt{
+    height: 77px;
+    font-size: 12px;
+    box-sizing: border-box;
+    background: #f4f5f7;
+    border: 1px solid #e5e9ef;
+    overflow: auto;
+    border-radius: 5px;
+    color: #555;
+    width: auto;
+    transition: 0s;
+    padding: 5px 10px;
+    margin-right: 15px;
+    line-height: normal;
+    resize: none;
+    /* 取消掉，元素选中后，边框的改变 */
+    outline: none;
+}
+/* .comment-list .ipt-txt{
+    height: 65px;
+} */
+.ipt-txt:hover, .focus{
+    background: #fff;
+    border-color: #00a1d6;
+}
+.error{
+    background: #fff;
+    border-color: #e40c0c!important;
+}
+/* 评论提交按钮 */
+.comment-submit{
+    width: 70px;
+    height: 64px;
+    padding: 4px 15px;
+    color:#fff;
+    border-radius: 5px;
+    cursor: pointer;
+    background:#00a1d6;
+    border: 1px solid #00a1d6;
+    transition: 1s;
+    /* 取消掉点击后出现的黑线 */
+    outline: none;
+}
+.comment-submit:hover{
+    background: #00b5e5;
+    border-color: #00b5e5;
+}
+/* 评论表情选择按钮 */
+.comment-emoji{
+    position: relative;
+    left: 85px;
+    margin: 6px 0px;
+    padding: 3px;
+    text-align: center;
+    width: 55px;
+    border-radius: 4px;
+}
+.comment-emoji:hover{
+    background: #f5f5f5;
+    cursor: pointer;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 评论列表盒子 */
+.comment-list{
+    padding-top: 20px;
+    font-family: Microsoft YaHei,Arial,Helvetica,sans-serif;
+}
+/* 评论的头像盒子 */
+.user-face{
+    float: left;
+    margin: 24px 0 0 5px;
+    position: relative;
+}
+/* 用户信息的盒子的设置 */
+.user{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    padding-bottom: 4px;
+    position: relative;
+}
+/* 一般用户名 */
+.name{
+    color: #6d757a;
+}
+/* vip的，红色的用户名 */
+.vip-red-name{
+    color: #fb7299!important;
+}
+/* 评论信息盒子，与评论头像处于同一级 */
+.con-content{
+    position: relative;
+    margin-left: 85px;
+    padding: 22px 0 14px;
+}
+/* 评论文本 */
+.text{
+    line-height: 20px;
+    padding: 2px 0px;
+    font-size: 14px;
+    text-shadow: none;
+    overflow: hidden;
+    /* word-break属性指定非CJK脚本的断行规则。提示:CJK脚本是中国，日本和韩国（"中日韩"）脚本。 */
+    /*  normal	使用浏览器默认的换行规则。
+        break-all	允许在单词内换行。
+        keep-all	只能在半角空格或连字符处换行。 */
+    word-break: break-all;
+}
+/* 评论的用户信息 */
+.con-info{
+    color: #99a2aa;
+    line-height: 26px;
+    font-size: 12px;
+}
+.con-info>span{
+    margin-right: 20px;
+}
+.con-info .fa{
+    /* 大小,不继承父元素的字体大小 */
+    font-size: initial;
+    width: 15px;
+    height: 15px;
+}
+.hover-color-blue-only:hover{
+   color: #00a1d6!important;
+}
+.hover-color-blue a:hover{
+   color: #00a1d6!important;
+}
+.hover-color-blue i:hover{
+   color: #00a1d6!important;
+}
+.hover-background-gray:hover{
+    background: #e5e9ef!important;
+}
+.reply-button{
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 回复，子评论 */
+.reply-item{
+    padding: 10px 0px;
+}
+/* 回复头像盒子 */
+.reply-face-box{
+    float:left;
+    position: relative;
+    top: -2px;
+    margin-right: 10px;
+}
+/* 回复头像 */
+.reply-face{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+/* 回复文本 */
+.reply-text{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: pre-wrap;
+}
+/* 回复图片 */
+.reply-img-small{
+    width: 20px;
+    height: 20px;
+    vertical-align: text-bottom;
+    padding: 0 1px;
+}
+.color-blue-a a{
+    color: #00a1d6!important;
+}
+.color-blue-only{
+    color: #00a1d6!important;
+}
+.hover-coler-red-only:hover{
+    color: #f25d8e!important;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 表情包盒子 */
+.emoji-box{
+    position: absolute;
+    z-index: 10001;
+    font-size: 12px;
+    color: #222;
+    overflow: visible;
+    background: #fff;
+    border: 1px solid #e5e9ef;
+    /* 边框阴影 */
+    box-shadow: 0 11px 12px 0 rgba(106,115,133,.3);
+    border-radius: 8px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    width: 363px;
+}
+.emoji-box::before{
+    /* 在边框左上方，添加一个白色三角 */
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 30px;
+    width: 8px;
+    height: 5px;
+    background: url(../img/arrow-2.png) 0 -49px no-repeat;
+}
+/* 标题的字体 */
+.emoji-title{
+    line-height: 16px;
+    margin: 13px 15px 0;
+    color: #757575;
+}
+/* 子表情的盒子 */
+.emoji-wrap{
+    margin: 6px 11px 0;
+    height: 196px;
+    font-size: 0;
+    overflow: auto;
+    word-break: break-word;
+}
+.emoji-text:hover {
+    background-color: #ddd;
+}
+.emoji-small{
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.emoji-wrap .emoji-small img {
+    margin: 4px;
+    width: 24px;
+    height: 24px;
+}
+/* 父表情包盒子 */
+.emoji-box .emoji-tabs {
+    position: relative;
+    height: 36px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    border-radius: 0 0 4px 4px;
+}
+.emoji-box .emoji-tabs .tab-link {
+    float: left;
+    padding: 7px 18px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+.emoji-box .emoji-tabs .emoji-container {
+    width: 290px;
+    overflow: hidden;
+}
+.emoji-box .emoji-tabs .emoji-tab-wrap {
+    position: relative;
+    width: 232px;
+    left: 0px;
+}
+.emoji-box .emoji-tabs .tab-link:hover {
+    background: #e7e7e7!important;
+}
+.emoji-box .emoji-tabs .tab-link.on {
+    background-color: #fff;
+}
+.emoji-box .emoji-tabs .tab-link img {
+    width: 22px;
+}
+/* 评论，点赞，收藏的快捷按钮  盒子*/
+.article-actions{
+    padding: 0px 10px;
+    position: fixed;
+    left: 0px;
+    top: 242px;
+    background-color: rgb(255,255,255,0.5);
+    color: #222;
+}
+.article-actions_item{
+    cursor: pointer;
+    padding: 15px;
+    display: flex;
+    /* 使得flex里面的元素独占一行 */
+    flex-direction: column;
+    /* 水平/垂直居中 */
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    /* transition: 0.1s; */
+}
+.article-actions_item:hover{
+    background: #e5e9ef;
+}
+.mini{
+    padding:10px 20px;
+    text-align: center;
+    margin: 0!important;
+}
+.comment_submit_err{
+    border-radius: 4px;
+    background-color: rgba(255, 0, 0, 0.8);
+    width: 98px;
+    height: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+    position: absolute;
+    z-index: 10001; 
+}

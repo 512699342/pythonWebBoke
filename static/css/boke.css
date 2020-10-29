@@ -1,0 +1,50 @@
+/* 当前页面所有boked的盒子 */
+
+/* 除了第一个之外，每一个boke的盒子上偏移 */
+.boke-inner:not(:first-child){
+    margin-top: 120px;
+}
+
+/* 每个boke的title */
+.boke-title-content{
+    font-size: 1.5em;
+    color: #555555;
+
+}
+.boke-title a{
+    transition: 0.3s;
+    border-bottom-width:2px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+}
+/* 每个boke的链接的hover伪属性 */
+.boke-inner a:hover{
+    border-color:black;
+}
+/* 时间和分类的盒子 */
+.boke-time-tag{
+    margin: 5px 0 20px 0;
+    font-size: 0.85em;;
+    color: #999;
+}
+/* 时间的样式 */
+.boke-time-tag span time{
+    border-bottom: 1px dashed #999;
+    cursor: pointer;
+}
+/* 简介 */
+.boke-summary{
+    margin-bottom: 20px;
+}
+/* 更多内容的box */
+.more-content{
+    margin-top: 20px;
+    text-align: justify;
+}
+/* 更多内容 */
+.more-content a{
+    border-bottom: 2px solid #666;
+    font-size: 0.875em;
+    padding: 0;
+    transition-property: border;
+}

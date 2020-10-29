@@ -1,0 +1,1534 @@
+注：（1）-（8）为登录页面用到的
+
+
+（1）定义超文本:图片+文字组合
+        <a herf="#">
+            <img src="/static/apple-touch-icon.png" class="logo" alt="logo">
+            <span class="title">公主连结Re: Dive Fan Club</span>
+        </a>
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（2）标签元素居中
+block为:margin:0 auto;inline的为text-align:center;
+<div>元素为block
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（2）子元素的字体居中
+text-align: center;
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（2）垂直居中
+            display: inline-block;
+            vertical-align:middle;
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（2）所有子元素垂直/水平居中
+           display: flex;
+           justify-content: center;
+           align-items: center;
+-----------------------------------------------------------分割线-----------------------------------------------------------
+(3)设置字体大小和颜色
+            font-size:16px;
+            color:orange;
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（4）设置图片大小和圆角
+            width:40px;
+            border-radius:30px;
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（5）去掉<a herf>超链接的下划线，改变颜色，改变选中的颜色，改变鼠标指针形状
+       a
+       {
+            color:orange;
+            text-decoration:none;
+       }
+       a:hover	# 伪类，当鼠标移动到元素上时
+       {
+           color:#FFCC33;
+           cursor: pointer;
+       }
+ 
+a:link {color: #FF0000}		/* 未访问的链接 */
+a:visited {color: #00FF00}	/* 已访问的链接 */
+a:hover {color: #FF00FF}	/* 鼠标移动到链接上 */
+a:active {color: #0000FF}	/* 选定的链接 */
+
+提示：在 CSS 定义中，a:hover 必须被置于 a:link 和 a:visited 之后，才是有效的。
+
+提示：在 CSS 定义中，a:active 必须被置于 a:hover 之后，才是有效的。
+
+提示：伪类名称对大小写不敏感。
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（6）切换显示和隐藏元素，获取内容，设置内容
+1、切换显示/隐藏元素 
+$('#register-box').toggle();
+
+2、获取元素
+$('.global_register_title').text() - 获取所选元素的文本内容，
+$('.global_register_title').html() - 获取所选元素的内容（包括 HTML 标记）
+$('.global_register_title').val() - 获取表单元素的value值
+获取属性内容
+var flag = a.attr('flag');
+
+3、设置元素
+设置内容
+$('.register-but').text("登录");
+$('#to-login').html('没有账号？<!-- --> <a onclick="change_box_register()">去注册</a>');
+设置属性内容
+        $('#post-from').attr('action','/user/login');
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（7）让浏览器不使用缓存文件
+在每个请求的后面加一个随机动态的参数
+如：<script src="/static/js/user.js?3s"></script>
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（8）设置背景色的透明度，背景透明
+1、
+# 使用这种方法，只有背景色会透明，其他元素不会透明
+background-color: rgb(255,255,255,0.8);
+2、
+# 使用这种方法，标签元素和其在内的所有子元素会透明
+opacity: 0.5;
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（9）在input框里面添加一个小图标
+1、用一个标签元素div包着input和小图标img，设置input的padding，然后设置图标为绝对布局。
+       .input-icon
+       {
+           width: 13px;
+           height: 13px;
+           position: absolute;
+           margin-left: 4px;
+           margin-top: 12px;
+       }
+       .ant-input
+       {
+           padding-left: 25px;
+           height: 30px;
+           width: 300px;
+           margin-bottom:30px;
+           border-width: 1px;
+           border-color: lightgray;
+           border-style: solid;
+           border-radius: 5px;
+
+       }
+       .ant-input:hover	# 添加选中效果
+       {
+            border-color: orange;
+       }
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（10）设置背景图片，让背景图片充满整个屏幕
+       body
+       {
+           background-image: url(https://cdn.jsdelivr.net/gh/peterli110/pcrdfans_statics/background.jpg);
+           background-attachment: fixed;
+           background-size: cover;
+       }
+    /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+    background-attachment: fixed;  //此条属性必须设置否则可能无效/
+
+    /* 让背景图基于容器大小伸缩 */
+   background-size: cover;
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（11）消除导航栏和底栏与body的空格
+        body
+        {
+            margin: 0;
+            padding: 0;
+        }
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（12）在一个文本上下添加上线划线
+            <div class="boke-top-title">
+                <span class="login-line-top">
+                </span>
+                <a href="123">小士刀2.0</a>
+                <span class="login-line-bto">
+                </span>
+            </div>
+
+        .login-line-top, .login-line-bto	# 上下划线
+        {
+            display: block;
+            height: 2px;
+            width: 70%;
+            margin: 0 auto;
+            background: #222;
+            position: relative;
+        }
+        a
+        {
+            text-decoration:none;
+            color: #222;
+        }
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（13）SVG和path创建gitHub图形
+css部分：
+        .github-corner svg
+        {
+            border: 0;
+            color: #fff;
+            fill: #222;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 1000;
+        }
+        .github-corner :hover .octo-arm
+        {
+            animation: octocat-wave 560ms ease-in-out;
+        }
+
+        @-webkit-keyframes octocat-wave {
+          0%, 100% {
+            transform: rotate(0);
+          }
+          20%, 60% {
+            transform: rotate(-25deg);
+          }
+          40%, 80% {
+            transform: rotate(10deg);
+          }
+
+html部分：
+            <a href="https://github.com/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank">
+                <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
+                    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+                    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+                    <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+                </svg>
+            </a>
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（14）导航栏
+html:
+    <div class="boke-top">
+        <i role="button" class="fa fa-bookmark fa-2x book-mark-pos" aria-hidden="true"></i>
+        <div class="boke-top-inner">
+                <div class="boke-top-title">
+                    <span class="login-line-top">
+                    </span>
+                    <a href="123">梁金辉2.0</a>
+                    <span class="login-line-bto">
+                    </span>
+                </div>
+                <nav class="boke-top-menu">
+                    <ul class="list-no">
+                        <li class="gua-nav-li">
+                            <a class="gua-nav-link gua-active" href="/boke">首页</a>
+                        </li>
+                        <li class="gua-nav-li">
+                            <a class="gua-nav-link" href="/user/">注册</a>
+                        </li>
+                        <li class="gua-nav-li">
+                            <a class="gua-nav-link" href="/user/">登录</a>
+                        </li>
+                        <li class="gua-nav-li">
+                            <a class="gua-nav-link" href="{{url_for('boke.new')}}">
+                                发布新博客
+                                <i class="fa fa-sort-desc icon-pl-3x" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="gua-nav-li" style="float:right">
+                            {% block logoff %}
+                            {% endblock %}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <a href="https://github.com/" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank">
+                <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
+                    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+                    <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+                    <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+                </svg>
+            </a>
+    </div>
+
+css:
+/* 所有a标签的默认样式 */
+a
+{
+    text-decoration:none;
+    color: #555;
+}
+a:hover
+{
+    color: #222;
+    cursor: pointer;
+}
+/* 整个导航栏 */
+.boke-top
+{
+    background:#f5f5f5;
+}
+/* 导航栏的中间内容 */
+.boke-top-inner
+{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px 0;
+    width: 700px;
+    background:#F5F5F5;
+    position: relative;
+
+}
+/* 导航栏标题 */
+.boke-top-title
+{
+    font-size: 1.325em;
+    line-height: 1.5;
+    font-weight: bolder;
+    float: left;
+    /* position: relative;
+    left: -30px; */
+    margin-right: 40px;
+}
+/* 上下划线 */
+.login-line-top, .login-line-bto
+{
+    display: block;
+    height: 2px;
+    width: 70%;
+    margin: 0 auto;
+    background: #222;
+    position: relative;
+}
+/* 导航栏的box */
+/* 导航栏中间的ul的样式 */
+.list-no
+{
+    /* 每个li前面默认为一个小圆点，none之后则没有小圆点 */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/* 导航栏的li标签 */
+.gua-nav-li
+{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.gua-nav-li:hover
+{
+    background:#ddd;
+    border-radius:2px;
+}
+/* 导航栏的链接 */
+.gua-nav-link
+{
+    /* display: inline-block; */
+    padding: 0 10px;
+    color: #555;
+    font-size:0.8125em;
+}
+/* 猫的位置 */
+.github-corner svg
+{
+    border: 0;
+    color: #fff;
+    fill: #222;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+/* 猫手的动画 */
+.github-corner :hover .octo-arm
+{
+    animation: octocat-wave 560ms ease-in-out;
+}
+/* 猫手的动画 */
+@-webkit-keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(-25deg);
+  }
+  40%, 80% {
+    transform: rotate(10deg);
+  }
+}
+
+/* 书签位置 */
+.book-mark-pos{
+    border-bottom: none;
+    display: inline-block;
+    position: fixed;
+    left: 30px;
+    top: -2px;
+    cursor: pointer;
+    /*
+    transition-property: 过渡属性(默认值为all)
+    transition-duration: 过渡持续时间(默认值为0s)
+    transiton-timing-function: 过渡函数(默认值为ease函数)
+    transition-delay: 过渡延迟时间(默认值为0s)
+    */
+    transition:1s;
+}
+.book-mark-pos:hover{
+    color: #222;
+}	
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（17）role属性
+对于一些没有特别的标签特性的如div，span来说，这个role就是一种定性的作用了
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（18）flexd；相对于屏幕的布局
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（19）进度条，上和下
+html:
+        <!-- // 滚动进度条上 -->
+        <div class="reading-progress-bar" style="width: 0%;"></div>
+        <!-- // 滚动进度条下 -->
+        <div class="back-to-top back-to-top-on">
+            <i class="fa fa-arrow-up"></i>
+            <span>0%</span>
+        </div>
+css:
+/* 进度条 上*/
+.reading-progress-bar
+{
+    background: #37c6c0;
+    display: block;
+    height: 3px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    z-index: 1500;
+}
+/* 进度条 下*/
+.back-to-top {
+    cursor: pointer;
+    opacity: 0.8;
+    z-index: 1300;
+
+    background: #222;
+    color: #fff;
+    position: fixed;
+    left: auto;
+    right: 20px;
+    bottom:-100px;
+    font-size: 12px;
+    padding: 0 6px;
+
+    transition: bottom 0.2s ease-in-out 0s;
+}
+.back-to-top:hover{
+    color:#87daff;
+}
+.back-to-on{
+    bottom: 19px;
+}
+
+js:
+            // 滚动条实现，侦听滚动事件
+             $(document).scroll(function() {
+                 var scroH = $(document).scrollTop(); //滚动高度
+                 var viewH = $(window).height(); //可见高度
+                 var contentH = $(document).height(); //内容高度
+                 var nowf = scroH/(contentH-viewH)*100;
+                 var nowi = parseInt(nowf);
+                 var nowP = String(nowi)+'%';
+                 $('.back-to-top span').text(nowP);
+                 $('.reading-progress-bar').css('width',nowP);
+                 // 实现当进度条大于1%时，显示下进度条
+                 if(nowi>1){$('.back-to-top').addClass('back-to-on');}
+                 else{$('.back-to-top').removeClass('back-to-on');};
+              });
+            // 重置滚动条进度为0，返回最顶部,.animate({属性:变化},时间)，指定一定时间内完成css变换
+            $('.back-to-top').on('click',function(){$('html,body').animate({scrollTop: '0px'}, 300);});
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（21）在js中添加事件绑定
+用jquery元素用.on('onclick', function(){***})	如： $('#id-button-submit').on('click', function(){***}
+
+# 需要注意，要加上，即js代码在页面加载完成后再执行。
+    <script>
+    var __main = function() {
+        $(".book-mark-pos").on('click',function(){
+            // 实现书签位置，一会上，然后一会下,动画效果
+            $('.book-mark-pos').css('top','-30px');
+            setTimeout(function(){$('.book-mark-pos').css('top','-3px');}, "1000");
+        });
+    }
+
+$(document).ready(function(){
+            __main();
+        });
+    </script>
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（22）书签实现，CSS过度属性transition，实现动画效果，实现书签一会上，一会下	
+/* 导入awesome（一个图标库网站）的css */
+<link rel="stylesheet" href="/static/css/font-awesome-4.7.0/css/font-awesome.min.css">
+/* 书签 */
+html:
+<i role="button" class="fa fa-bookmark fa-2x book-mark-pos" aria-hidden="true"></i>
+
+css:
+/* 书签位置 */
+.book-mark-pos{
+    border-bottom: none;
+    display: inline-block;
+    position: fixed;
+    left: 30px;
+    top: -2px;
+    cursor: pointer;
+    /*
+    transition-property: 过渡属性(默认值为all)
+    transition-duration: 过渡持续时间(默认值为0s)
+    transiton-timing-function: 过渡函数(默认值为ease函数)
+    transition-delay: 过渡延迟时间(默认值为0s)  
+    */ 
+    transition:1s;
+}
+
+js:
+/* js添加onclick事件给书签 */
+    var __main = function() {
+        $(".book-mark-pos").on('click',function(){
+            // 实现书签位置，一会上，然后一会下,动画效果，setTimeou()为延迟xxms后执行函数。
+            $('.book-mark-pos').css('top','-30px');
+            setTimeout(function(){$('.book-mark-pos').css('top','-3px');}, "1000");
+        });
+    }
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+(23)用户信息按钮的实现
+1、html
+        <div class="toggle sidebar-toggle">
+            <span class="toggle-line toggle-line-first"></span>
+            <span class="toggle-line toggle-line-middle"></span>
+            <span class="toggle-line toggle-line-last"></span>
+      </div>
+2、css
+/* 用户信息按钮 */
+.sidebar-toggle {
+  background: #222;
+  bottom: 45px;
+  cursor: pointer;
+  height: 14px;
+  left: auto;
+  right: 20px;
+  padding: 5px;
+  position: fixed;
+  width: 14px;
+  z-index: 1300;
+}
+.toggle {
+  line-height: 0;
+}
+.toggle .toggle-line {
+  background: #fff;
+  display: inline-block;
+  height: 2px;
+  left: 0;
+  position: relative;
+  top: 0;
+  transition: all 0.4s;
+  vertical-align: top;
+  width: 100%;
+}
+.sidebar-toggle:hover .toggle-line{
+    background:#87daff;
+}
+.toggle .toggle-line:not(:first-child) {
+  margin-top: 3px;
+}
+/* 鼠标移到图标后，图标的变化 */
+.toggle.toggle-arrow .toggle-line-first {
+  top: 2px;
+  transform: rotate(-45deg);
+  width: 50%;
+}
+.toggle.toggle-arrow .toggle-line-middle {
+  width: 90%;
+}
+.toggle.toggle-arrow .toggle-line-last {
+  top: -2px;
+  transform: rotate(45deg);
+  width: 50%;
+}
+/* 鼠标点击图标后，图标的变化 */
+.toggle.toggle-close .toggle-line-first {
+  top: 5px;
+  transform: rotate(-45deg);
+}
+.toggle.toggle-close .toggle-line-middle {
+  opacity: 0;
+}
+.toggle.toggle-close .toggle-line-last {
+  top: -5px;
+  transform: rotate(45deg);
+}
+3、js
+   $('.sidebar-toggle').mouseenter(function(){ if($('.toggle-close')[0] == undefined)
+                 {
+                     // 当不存在关闭属性时，添加箭头属性
+                     $('.sidebar-toggle').addClass('toggle-arrow');
+                 }
+                 });
+   $('.sidebar-toggle').on('mouseleave',function(){$('.sidebar-toggle').removeClass('toggle-arrow');});
+   $('.sidebar-toggle').on('click',function(){$('.sidebar-toggle').removeClass('toggle-arrow');$('.sidebar-toggle').toggleClass('toggle-close');});
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（24）滚动条上下实现，0.3S内重置滚动条为0。
+html:
+        <!-- // 滚动进度条上 -->
+        <div class="reading-progress-bar" style="width: 0%;"></div>
+        <!-- // 滚动进度条下 -->
+        <div class="back-to-top back-to-top-on">
+            <i class="fa fa-arrow-up"></i>
+            <span>0%</span>
+        </div>
+css:	
+/* 进度条 上*/
+.reading-progress-bar
+{
+    background: #37c6c0;
+    display: block;
+    height: 3px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    z-index: 1500;
+}
+/* 进度条 下*/
+.back-to-top {
+    cursor: pointer;
+    opacity: 0.8;
+    z-index: 1300;
+
+    background: #222;
+    color: #fff;
+    position: fixed;
+    left: auto;
+    right: 20px;
+    bottom:-100px;
+    font-size: 12px;
+    padding: 0 6px;
+
+    transition-property: bottom;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+.back-to-top:hover{
+    color:#87daff;
+}
+.back-to-on{
+    bottom: 19px;
+}
+js:
+            // 滚动条实现，侦听滚动事件
+             $(document).scroll(function() {
+                 var scroH = $(document).scrollTop(); //滚动高度
+                 var viewH = $(window).height(); //可见高度
+                 var contentH = $(document).height(); //内容高度
+                 var nowf = scroH/(contentH-viewH)*100;
+                 var nowi = parseInt(nowf);
+                 var nowP = String(nowi)+'%';
+                 $('.back-to-top span').text(nowP);
+                 $('.reading-progress-bar').css('width',nowP);
+                 // 实现当进度条大于1%时，显示下进度条
+                 if(nowi>1){$('.back-to-top').addClass('back-to-on');}
+                 else{$('.back-to-top').removeClass('back-to-on');};
+              });
+            // 重置滚动条进度为0，返回最顶部,.animate({属性:变化},时间)，指定一定时间内完成css变换
+            $('.back-to-top').on('click',function(){$('html,body').animate({scrollTop: '0px'}, 300);});
+
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（25）sidebar的实现
+html:
+ <div class="boke-sidebar">
+            <div class="sidebar-inner">
+                <div class="sidebar-auther">
+                    <img src="\static\img\apple-touch-icon.png" class="auther-icon" alt="auther-icon">
+                    <p class="auther-name">梁金辉</p>
+                    <div class="auther-description">
+                        一个喜欢看动漫的死宅
+                    </div>
+                </div>
+                <div class="sidebar-census">
+                    <nav>
+                        <li>
+                            <a href="11">
+                                <span class="items-count">14</span>
+                                <span class="items-name">博客</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="11">
+                                <span class="items-count">15</span>
+                                <span class="items-name">分类</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="11">
+                                <span class="items-count">16</span>
+                                <span class="items-name">标签</span>
+                            </a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="feed-link">
+                    <a  href="">
+                        <i class="fa fa-rss"></i>
+                        <span>RSS</span>
+                    </a>
+                </div>
+                <div class="sidebar-auther-link">
+                    <span> <a href="11">GitHub</a></span>
+                    <span> <a href="11">GitHub</a></span>
+                    <span> <a href="11">GitHub</a></span>
+                    <span> <a href="11">GitHub</a></span>
+                    <span> <a href="11">GitHub</a></span>
+                    <span> <a href="11">GitHub</a></span>
+                </div>
+                {% block sidebar %}
+                <h1>hello </h1>
+                {% endblock %}
+            </div>
+        </div>
+css:
+/* sidebar */
+/* 总的sidebar布局 */
+.boke-sidebar
+{
+    position: fixed;
+    right: -320px;
+    top: 0;
+    height: 100%;
+    width: 320px;
+    margin-left: auto;
+    transition: 0.4s;
+    background: #222;
+    z-index: 1200;
+
+}
+.boke-sidebar-active
+{
+    right: 0;
+}
+.boke-sidebar-active-body
+{
+    margin-right: 320px;
+}
+/* sidebar的用户信息 */
+.sidebar-inner
+{
+    color: #999;
+    padding: 20px 10px;
+    text-align: center;
+}
+/* sidebar的用户图标 */
+.auther-icon
+{
+    margin: 0 auto;
+    max-width:96px;
+    border-radius: 10px;
+    padding: 1px;
+}
+/* sidebar的用户名字 */
+.auther-name
+{
+    display: block;
+    color: #F5F5F5;
+    margin:5px 0 0;
+}
+/* sidebar的用户描述 */
+.auther-description
+{
+    color: #999;
+    font-size: 1em;
+    margin-top: 5px;
+}
+/* 中间的分类和统计 */
+.sidebar-census nav
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+.sidebar-census nav li
+{
+    display: block;
+    padding: 0 15px;
+}
+.sidebar-census nav li:not(:first-child)
+{
+    border-left: 1px solid #333;
+}
+.items-count
+{
+    display: block;
+    font-size: 1.25em;
+    font-weight: 600;
+    text-align: center;
+}
+.items-name
+{
+    font-size: 0.875em;
+}
+/* sidebar的所有a标签的基本样式 */
+.boke-sidebar a
+{
+    color: #999;
+}
+.boke-sidebar a:hover
+{
+    color: #fff;
+}
+/* RSS的a标签 */
+.feed-link
+{
+    margin-top: 15px;
+}
+.feed-link a
+{
+    border: 1px solid #fc6423;
+    border-radius: 4px;
+    color: #fc6423;
+    display: inline-block;
+    padding: 0 15px;
+}
+/* 最下面的作者其他链接 */
+.sidebar-auther-link
+{
+    margin-top: 15px;
+}
+.sidebar-auther-link a
+{
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    vertical-align: middle;
+    font-size: 0.8125em;
+    border-bottom: 1px solid #999;
+}
+.sidebar-auther-link a::before
+{
+    background: #526b67;
+    border-radius: 50%;
+    content: ' ';
+    display: inline-block;
+    height: 4px;
+    margin-right: 3px;
+    vertical-align: middle;
+    width: 4px;
+}
+.sidebar-auther-link a:hover
+{
+    border-color:#fff;
+}
+js:
+            // sidebar的滚动出现
+            $('.sidebar-toggle').on('click',function(){
+                $('.boke-sidebar').toggleClass('boke-sidebar-active');
+                $('body').toggleClass('boke-sidebar-active-body')
+            });
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（25）底栏的实现
+html:
+    <div class="boke-bottom a-bottom-1">
+        <div class="boke-bottom-content boke-content-size">
+            <div class="boke-bottom-ico">
+                 <a href="#">粤ICP备********号</a>
+            </div>
+            <div class="boke-bottom-meta">
+                <span>© 2013 – 2020</span>
+                <span>
+                    <span><i class="fa fa-user icon-p-3x"></i> </span>
+                    <span>jinhui</span>
+                </span>
+            </div>
+            <div class="boke-bottom-pageView">
+                <span class="meta-item">
+                    <span><i class="fa fa-user icon-pr-3x"></i></span>
+                    <span>735268</span>
+                </span>
+                <span class="meta-item">
+                    <span><i class="fa fa-eye icon-pr-3x"></i></span>
+                    <span>2804336</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+css:	
+/* 底栏盒子 */
+.boke-bottom{
+    background: #f5f5f5;
+    color: #666;
+    font-size: 0.9em;
+    padding: 10px 0;
+    width: 100%;
+}
+/* 底栏的内容 */
+.boke-bottom-content
+{
+    text-align: left;
+    margin: 0 auto;
+    width: 700px;
+}
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（26）日期和分类,图标+文字，的实现
+html:
+            <div class="boke-time-tag a-bottom-1">
+                    <span class="meta-item">
+                        <span class="icon-pr-3x"><i class="fa fa-calendar-o"></i></span>
+                        <span>发表于</span>
+                        <span><time>2020-09-07</time></span>
+                    </span>
+                    <span class="meta-item">
+                        <span class="icon-pr-3x"><i class="fa fa-folder-o"></i></span>
+                        <span>分类于</span>
+                        <span>
+                            <a href="#">
+                                朝花夕拾
+                            </a>
+                        </span>
+                    </span>
+            </div>
+css:
+/* 时间和分类的盒子 */
+.boke-time-tag{
+    margin: 5px 0 20px 0;
+    font-size: 0.85em;;
+    color: #999;
+}
+/* 时间的样式 */
+.boke-time-tag span time{
+    border-bottom: 1px dashed #999;
+    cursor: pointer;
+}
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（27）自动撑开的textarea，标题框输入实现
+html:
+    <div class="edit-title-box">
+	<!-- rows='1' 规定开始的默认高度 -->
+        <textarea rows='1' class="title-Input" placeholder="请输入标题（最多 50 个字）"></textarea>
+    </div>
+css:
+.edit-title-box{
+    margin: 0px 16px;
+    width: 100%;
+    position: relative;
+}
+.title-Input{
+    font-family: inherit;
+    font-size: 32px;
+    line-height: 1.4;
+    font-weight: 600;
+    padding: 0;
+    /* 让滚动条自适应 */
+    overflow:auto;
+    /* 不显示边框 */
+    border: 0;
+    /* 最大宽度 */
+    width: 100%;
+    /* 取消掉选中后显示的边框 */
+    outline: none;
+    /* resize: none; 取消掉用户自由调整便签的大小，取消掉textarea右下角的阴影 */
+    resize: none;
+}
+js:
+            // 自动撑开的textarea
+            $('.boke-comment-box').on('input','.ipt-txt',function(e) {
+                var offsetHeight = e.target.offsetHeight;
+                $(e.target).css('height', 'auto').css('height', e.target.scrollHeight  + 'px');
+                if(e.target.offsetHeight !=  offsetHeight){
+                    grow_height = e.target.offsetHeight - offsetHeight;
+                    other_grow(grow_height);
+                }
+            });
+            function px_to_number(str){
+                return Number(str.slice(0,-2));
+            }
+            // 其他东西的位置，随之改变，这里是表情盒子
+            function other_grow(gh){
+                var e = $('.emoji-box');
+                var emoji_top = px_to_number(e[0].style.top) + gh;
+                e.css('top',emoji_top);
+            };
+-----------------------------------------------------------分割线-----------------------------------------------------------
+（28）评论输入，评论显示，回复输入，回复显示的实现
+html:
+        <div class="boke-comment-box top-1-pale" >
+            <!-- 发送评论的盒子 -->
+            <div id="comment-send-copy">
+                <div class="comment-send hasTextarea">
+                    <div class="send-content">
+                        <img class="user-head" src="/static/img/noface.jpg@52w_52h.webp" alt="user_face">
+                        <textarea cols="80" name="msg" rows="5" placeholder="发条友善的评论" class="ipt-txt textarea-grow"></textarea>
+                        <button type="submit" class="comment-submit">发表评论</button>
+                    </div>
+                    <div class="comment-emoji">
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                        <span class="text">表情</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 发表评论表情包盒子 -->
+            <div class="emoji-box" style="display:none">
+                    <div class="emoji-title">
+                        <span>小黄狗</span>
+                    </div>
+                    <div class="emoji-wrap">
+                        <a class="emoji-text emoji-small" data-emoji-text="[狗头]" data-pid="1" data-id="1">
+                            <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp" title="[狗头]">
+                        </a>
+                        <a class="emoji-text emoji-small" data-emoji-text="[狗头2]" data-pid="1" data-id="2">
+                            <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp" title="[狗头2]">
+                        </a>
+                    </div>
+                    <div class="emoji-tabs">
+                        <div class="emoji-container">
+                            <div class="emoji-tab-wrap clearfix">
+                                <a class="tab-link on" data-index="0" data-pid="1">
+                                    <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp">
+                                </a>
+                                <a class="tab-link" data-index="0" data-pid="1">
+                                    <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp">
+                                </a>
+                            </div>
+                         </div>
+                    </div>
+            </div>
+            <!-- 评论内容盒子 -->
+            <div class="comment-list">
+                <div class="con hasTextarea">
+                    <div class="user-face">
+                        <a href="#">
+                            <img src="/static/img/noface.jpg@52w_52h.webp" alt="user_face" class="user-head ab-lt">
+                        </a>
+                    </div>
+                    <div class="con-content top-1-pale">
+                        <div class="user">
+                            <a href="#" class="name vip-red-name">暗猫の祝福</a>
+                        </div>
+                        <p class="text">新婚快乐！？</p>
+                        <div class="con-info hover-color-blue">
+                            <span class="plad">
+                                来自
+                                <a href="#" class="">iOS客户端</a>
+                            </span>
+                            <span class="time">2020-05-18 11:32</span>
+                            <span class="like">
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                <span>1</span>
+                            </span>
+                            <span class="hate">
+                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                            </span>
+                            <span class="reply-button hover-color-blue-only hover-background-gray">回复</span>
+                        </div>
+                        <div class="reply-box">
+                            <div class="reply-item">
+                                <div class="reply-face-box">
+                                    <a href="#">
+                                        <img src="/static/img/noface.jpg@52w_52h.webp" alt="user_face" class="reply-face">
+                                    </a>
+                                </div>
+                                <div class="user">
+                                     <a href="#" class="name hover-color-blue-only">叶风浅</a>
+                                     <span class="reply-text"> 回复 <a href="#" class="color-blue-only hover-coler-red-only">@碧落げ黄泉</a> :畜牲，你中了甚么 <img src="/static/img/bba7c12aa51fed0199c241465560dfc2714c593e.png@100w_100h.webp" class="reply-img-small" alt=""></span>
+                                </div>
+                                <div class="con-info hover-color-blue">
+                                    <span class="time">2020-05-19 9:27</span>
+                                    <span class="like">
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                        <span>1</span>
+                                    </span>
+                                    <span class="hate">
+                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="reply-button hover-color-blue-only hover-background-gray">回复</span>
+                                </div>
+                            </div>
+                            <div class="reply-item">
+                                <div class="reply-face-box">
+                                    <a href="#">
+                                        <img src="/static/img/35f83e16eca6018ea37960e3f0f9765384840c03.jpg@52w_52h.webp" alt="user_face" class="reply-face">
+                                    </a>
+                                </div>
+                                <div class="user">
+                                    <a href="#" class="name">碧落げ黄泉</a>
+                                    <span class="reply-text">我中了</span>
+                                </div>
+                                <div class="con-info hover-color-blue">
+                                    <span class="time">2020-05-18 11:32</span>
+                                    <span class="like">
+                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                                        <span>1</span>
+                                    </span>
+                                    <span class="hate">
+                                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="reply-button hover-color-blue-only hover-background-gray">回复</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="paging-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+css:
+/* ------------------------------------------------------------------------------------------ */
+/* 评论部分 */
+/* 总的评论盒子 */
+.boke-comment-box{
+    position: relative;
+    padding-top: 40px;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 发送评论的盒子 */
+.comment-send {
+    margin: 10px 0px;
+}
+.send-content
+{
+    display: flex;
+    align-items: center;
+}
+/* 发表评论的用户头像 */
+.user-head{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.send-content img{
+    margin-right: 36px;
+}
+/* 发表评论的输入框 */
+.ipt-txt{
+    height: 77px;
+    font-size: 12px;
+    box-sizing: border-box;
+    background: #f4f5f7;
+    border: 1px solid #e5e9ef;
+    overflow: auto;
+    border-radius: 5px;
+    color: #555;
+    width: auto;
+    transition: 0s;
+    padding: 5px 10px;
+    margin-right: 15px;
+    line-height: normal;
+    resize: none;
+    /* 取消掉，元素选中后，边框的改变 */
+    outline: none;
+}
+/* .comment-list .ipt-txt{
+    height: 65px;
+} */
+.ipt-txt:hover, .focus{
+    background: #fff;
+    border-color: #00a1d6;
+}
+/* 评论提交按钮 */
+.comment-submit{
+    width: 70px;
+    height: 64px;
+    padding: 4px 15px;
+    color:#fff;
+    border-radius: 5px;
+    cursor: pointer;
+    background:#00a1d6;
+    border: 1px solid #00a1d6;
+    transition: 1s;
+}
+.comment-submit:hover{
+    background: #00b5e5;
+    border-color: #00b5e5;
+}
+/* 评论表情选择按钮 */
+.comment-emoji{
+    position: relative;
+    left: 85px;
+    margin: 6px 0px;
+    padding: 3px;
+    text-align: center;
+    width: 55px;
+    border-radius: 4px;
+}
+.comment-emoji:hover{
+    background: #f5f5f5;
+    cursor: pointer;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 评论列表盒子 */
+.comment-list{
+    padding-top: 20px;
+    font-family: Microsoft YaHei,Arial,Helvetica,sans-serif;
+}
+/* 评论的头像盒子 */
+.user-face{
+    float: left;
+    margin: 24px 0 0 5px;
+    position: relative;
+}
+/* 用户信息的盒子的设置 */
+.user{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    padding-bottom: 4px;
+    position: relative;
+}
+/* 一般用户名 */
+.name{
+    color: #6d757a;
+}
+/* vip的，红色的用户名 */
+.vip-red-name{
+    color: #fb7299!important;
+}
+/* 评论信息盒子，与评论头像处于同一级 */
+.con-content{
+    position: relative;
+    margin-left: 85px;
+    padding: 22px 0 14px;
+}
+/* 评论文本 */
+.text{
+    line-height: 20px;
+    padding: 2px 0px;
+    font-size: 14px;
+    text-shadow: none;
+    overflow: hidden;
+    /* word-break属性指定非CJK脚本的断行规则。提示:CJK脚本是中国，日本和韩国（"中日韩"）脚本。 */
+    /*  normal	使用浏览器默认的换行规则。
+        break-all	允许在单词内换行。
+        keep-all	只能在半角空格或连字符处换行。 */
+    word-break: break-all;
+}
+/* 评论的用户信息 */
+.con-info{
+    color: #99a2aa;
+    line-height: 26px;
+    font-size: 12px;
+}
+.con-info>span{
+    margin-right: 20px;
+}
+.con-info .fa{
+    /* 大小,不继承父元素的字体大小 */
+    font-size: initial;
+    width: 15px;
+    height: 15px;
+}
+.hover-color-blue-only:hover{
+   color: #00a1d6!important;
+}
+.hover-color-blue a:hover{
+   color: #00a1d6!important;
+}
+.hover-color-blue i:hover{
+   color: #00a1d6!important;
+}
+.hover-background-gray:hover{
+    background: #e5e9ef!important;
+}
+.reply-button{
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 回复，子评论 */
+.reply-item{
+    padding: 10px 0px;
+}
+/* 回复头像盒子 */
+.reply-face-box{
+    float:left;
+    position: relative;
+    top: -2px;
+    margin-right: 10px;
+}
+/* 回复头像 */
+.reply-face{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+/* 回复文本 */
+.reply-text{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: pre-wrap;
+}
+/* 回复图片 */
+.reply-img-small{
+    width: 20px;
+    height: 20px;
+    vertical-align: text-bottom;
+    padding: 0 1px;
+}
+.color-blue-a a{
+    color: #00a1d6!important;
+}
+.color-blue-only{
+    color: #00a1d6!important;
+}
+.hover-coler-red-only:hover{
+    color: #f25d8e!important;
+}
+/* ------------------------------------------------------------------------------------------ */
+/* 表情包盒子 */
+.emoji-box{
+    position: absolute;
+    z-index: 10001;
+    font-size: 12px;
+    color: #222;
+    overflow: visible;
+    background: #fff;
+    border: 1px solid #e5e9ef;
+    /* 边框阴影 */
+    box-shadow: 0 11px 12px 0 rgba(106,115,133,.3);
+    border-radius: 8px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    width: 363px;
+}
+.emoji-box::before{
+    /* 在边框左上方，添加一个白色三角 */
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 30px;
+    width: 8px;
+    height: 5px;
+    background: url(../img/arrow-2.png) 0 -49px no-repeat;
+}
+/* 标题的字体 */
+.emoji-title{
+    line-height: 16px;
+    margin: 13px 15px 0;
+    color: #757575;
+}
+/* 子表情的盒子 */
+.emoji-wrap{
+    margin: 6px 11px 0;
+    height: 196px;
+    font-size: 0;
+    overflow: auto;
+    word-break: break-word;
+}
+.emoji-text:hover {
+    background-color: #ddd;
+}
+.emoji-small{
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.emoji-wrap .emoji-small img {
+    margin: 4px;
+    width: 24px;
+    height: 24px;
+}
+/* 父表情包盒子 */
+.emoji-box .emoji-tabs {
+    position: relative;
+    height: 36px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    border-radius: 0 0 4px 4px;
+}
+.emoji-box .emoji-tabs .tab-link {
+    float: left;
+    padding: 7px 18px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+.emoji-box .emoji-tabs .emoji-container {
+    width: 290px;
+    overflow: hidden;
+}
+.emoji-box .emoji-tabs .emoji-tab-wrap {
+    position: relative;
+    width: 232px;
+    left: 0px;
+}
+.emoji-box .emoji-tabs .tab-link:hover {
+    background: #e7e7e7!important;
+}
+.emoji-box .emoji-tabs .tab-link.on {
+    background-color: #fff;
+}
+.emoji-box .emoji-tabs .tab-link img {
+    width: 22px;
+}
+/*  */
+
+js:
+        <!-- 判断当前评论是否已经有了回复框 -->
+        function is_exist_reply_send(obj){
+            var father = $(obj).closest('.con.reply-open');
+            <!-- $('body').css('background','red'); -->
+            return father[0] != undefined;
+        };
+        <!-- 删除其他回复评论的html -->
+         function del_other_reply_send(){
+             <!-- 删除html -->
+             $('.reply-open .comment-send').remove();
+             <!-- 删除其他回复框父元素的标记 -->
+             $('.con').removeClass('reply-open');
+         };
+        <!-- 在元素内，最后的位置，添加评论盒子的html -->
+        function add_reply_send(obj){
+            var send_content = $('#comment-send-copy').html();
+            var father = $(obj).closest('.con-content');
+            father.append(send_content);
+            <!-- 因为这里的添加是复制评论发送盒子的内容，因此需要进行初始化，防止将多余的内容复制到回复框 -->
+            father.find('textarea').css('height',77);
+        };
+        <!-- 设置相应的用户信息 -->
+        function set_user(obj){
+            var father = $(obj).parent();
+            var user_father = father.prevAll('.user');
+            var name  = user_father.children('a').text();
+            var text = '回复 ' + '@' + name;
+            var text_father = $(obj).closest('.con.reply-open');
+            var textarea = text_father.find('textarea');
+            textarea.attr('placeholder',text);
+        };
+        function insert_reply_send(obj){
+            if(is_exist_reply_send(obj)){
+                <!-- 添加textarea选中 -->
+                textarea_focus(obj);
+                <!-- 修改相应的用户信息 -->
+                set_user(obj);
+            }
+            else{
+                <!-- 删除其他回复框 -->
+                del_other_reply_send();
+                <!-- 添加回复框 -->
+                add_reply_send(obj);
+                <!-- 对父元素进行标记 -->
+                $(obj).closest('.con').addClass('reply-open');
+                <!-- 添加textarea选中 -->
+                textarea_focus(obj);
+                <!-- 设置相应的用户信息 -->
+                set_user(obj);
+            }
+
+        };
+        function set_emoji_box(obj){
+            var emoji_top = $(obj).offset().top - $('.boke-comment-box').offset().top + 30;
+            var emoji_left = $(obj).offset().left -  $('.boke-comment-box').offset().left;
+            var box = $('.emoji-box');
+            box.css({'top':emoji_top,'left':emoji_left});
+        };
+        <!-- 设置表情盒子位置，并显示或隐藏 -->
+        function show_emoji_box(obj){
+            <!-- 因为emoji-box设置的是绝对布局，因此要获取得到点击按钮相对于boke-comment-box的位置 -->
+            <!-- 设置位置 -->
+            set_emoji_box(obj);
+            <!-- 显示 -->
+            var box = $('.emoji-box');
+            box.toggle();
+        };
+        function del_textarea_focus(){
+            $('textarea.focus').removeClass('focus');
+        };
+        <!-- 为textarea添加选中，显示光标位置 -->
+        function textarea_focus(obj){
+            del_textarea_focus();
+            var textarea = $(obj).closest('.hasTextarea').find('textarea');
+            textarea.addClass('focus');
+            textarea.focus();
+        };
+        <!-- 点击回复，添加回复框 -->
+        $('.reply-button').on('click',function(){
+            <!-- 插入回复框的html -->
+            insert_reply_send(this);
+            <!-- 阻止冒泡事件 -->
+            event.stopPropagation();
+        });
+        <!-- 插入文本到textarea指定位置 -->
+        function insertText(obj,str) {
+            if (document.selection) {
+                var sel = document.selection.createRange();
+                sel.text = str;
+            } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+                var startPos = obj.selectionStart,
+                    endPos = obj.selectionEnd,
+                    cursorPos = startPos,
+                    tmpStr = obj.value;
+                obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+                cursorPos += str.length;
+                obj.selectionStart = obj.selectionEnd = cursorPos;
+            } else {
+                obj.value += str;
+            }
+        }
+        <!-- --------------------------分割线----------------------------- -->
+        <!-- 点击评论文本框，添加选中效果 -->
+        $('.boke-comment-box').on('click','.textarea-grow',function(){
+            $('.textarea-grow').removeClass('focus');
+            $(this).addClass('focus');
+            event.stopPropagation();});
+        <!-- 弹出和隐藏表情包盒子的效果 -->
+        <!-- 点击表情按钮，显示弹出层，为评论框添加选中效果 -->
+        $('.boke-comment-box').on('click','.comment-emoji',function(){
+            <!-- 为textarea添加选中，显示光标位置 -->
+            textarea_focus(this);
+            <!-- 显示或隐藏表情盒子 -->
+            show_emoji_box(this);
+            <!-- 阻止冒泡事件 -->
+            event.stopPropagation();
+        });
+        <!--  点击其他区域，隐藏弹出层，取消评论框添加选中效果 -->
+        $(document).bind("click", function(){
+            $(".emoji-box").css("display", "none");
+            $('.textarea-grow').removeClass('focus');});
+        <!-- 给弹出层绑定点击事件，阻止冒泡,就是说点了该 内容，就不会将事件 -->
+        $(".emoji-box").bind("click", function(){
+            event.stopPropagation();//==========阻止冒泡2
+        })
+        <!-- 点击表情，添加到评论框的效果 -->
+        $('.emoji-wrap').on('click','a',function(){
+            <!-- 将jq对象转为dom对象，因为insertText函数使用的是dom对象 -->
+            var str = $(this).attr('data-emoji-text');
+            var textarea = $('textarea.focus')[0];
+            <!-- var textarea = $('.textarea-grow').get(0); -->
+            insertText(textarea, str);
+        });
+        <!-- 切换表情包组的选中效果 -->
+        $('.tab-link').on('click',function(){
+            $('.tab-link').removeClass('on');
+            $(this).addClass('on');});
+            // 自动撑开的textarea
+            $('.boke-comment-box').on('input','.ipt-txt',function(e) {
+                var offsetHeight = e.target.offsetHeight;
+                $(e.target).css('height', 'auto').css('height', e.target.scrollHeight  + 'px');
+                if(e.target.offsetHeight !=  offsetHeight){
+                    grow_height = e.target.offsetHeight - offsetHeight;
+                    other_grow(grow_height);
+                }
+            });
+            function px_to_number(str){
+                return Number(str.slice(0,-2));
+            }
+            // 其他东西的位置，随之改变，这里是表情盒子
+            function other_grow(gh){
+                var e = $('.emoji-box');
+                var emoji_top = px_to_number(e[0].style.top) + gh;
+                e.css('top',emoji_top);
+            };

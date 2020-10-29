@@ -1,0 +1,437 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    line-height: 2;
+    position: relative;
+    transition: 0.4s;
+    transition:color 0.2;
+    color: #555;
+    min-height: 600px;
+}
+/* 一些常用的组件 */
+/* 在后面加一个 '|' */
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+.meta-item:not(:first-child)::before{
+    content: '|';
+    margin: 0 0.5em;
+}
+/* 右偏移3px */
+.icon-pr-3x
+{
+    margin-right: 3px;
+}
+/* 右偏移3px */
+.icon-pl-3x
+{
+    margin-left: 3px;
+}
+/* 左右偏移3px */
+.icon-p-3x
+{
+    margin:0 3px;
+}
+/* 所有a标签的默认样式 */
+a
+{
+    text-decoration:none;
+    color: #555;
+}
+a:hover
+{
+    color: #222;
+    cursor: pointer;
+}
+i{
+    cursor: pointer;
+}
+/* 底栏的a标签样式 */
+.a-bottom-1 a, .bottom-1-gray{
+    border-bottom: 1px solid #999;
+}
+.a-bottom-1 a:hover{
+    border-bottom-color: black;
+}
+.bottom-1-pale{
+    border-bottom: 1px solid #eee;
+}
+.top-1-pale{
+    border-top: 1px solid #eee;
+}
+
+/* 整个导航栏 */
+.boke-top
+{
+    background:#f5f5f5;
+}
+/* 导航栏的中间内容 */
+.boke-top-inner
+{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px 0;
+    width: 700px;
+    background:#F5F5F5;
+    position: relative;
+
+}
+/* 导航栏标题 */
+.boke-top-title
+{
+    font-size: 1.325em;
+    line-height: 1.5;
+    font-weight: bolder;
+    float: left;
+    /* position: relative;
+    left: -30px; */
+    margin-right: 40px;
+}
+/* 上下划线 */
+.login-line-top, .login-line-bto
+{
+    display: block;
+    height: 2px;
+    width: 70%;
+    margin: 0 auto;
+    background: #222;
+    position: relative;
+}
+/* 导航栏的box */
+/* 导航栏中间的ul的样式 */
+.list-no
+{
+    /* 每个li前面默认为一个小圆点，none之后则没有小圆点 */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/* 导航栏的li标签 */
+.gua-nav-li
+{
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.gua-nav-li:hover
+{
+    background:#ddd;
+    border-radius:2px;
+}
+/* 导航栏的链接 */
+.gua-nav-link
+{
+    /* display: inline-block; */
+    padding: 0 10px;
+    color: #555;
+    font-size:0.8125em;
+}
+/* 猫的位置 */
+.github-corner svg
+{
+    border: 0;
+    color: #fff;
+    fill: #222;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+/* 猫手的动画 */
+.github-corner :hover .octo-arm
+{
+    animation: octocat-wave 560ms ease-in-out;
+}
+/* 猫手的动画 */
+@-webkit-keyframes octocat-wave {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  20%, 60% {
+    transform: rotate(-25deg);
+  }
+  40%, 80% {
+    transform: rotate(10deg);
+  }
+}
+
+/* 书签位置 */
+.book-mark-pos{
+    border-bottom: none;
+    display: inline-block;
+    position: fixed;
+    left: 30px;
+    top: -2px;
+    cursor: pointer;
+    /*
+    transition-property: 过渡属性(默认值为all)
+    transition-duration: 过渡持续时间(默认值为0s)
+    transiton-timing-function: 过渡函数(默认值为ease函数)
+    transition-delay: 过渡延迟时间(默认值为0s)
+    */
+    transition:1s;
+}
+.book-mark-pos:hover{
+    color: #222;
+}
+/* 进度条 上*/
+.reading-progress-bar
+{
+    background: #37c6c0;
+    display: block;
+    height: 3px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    z-index: 1500;
+}
+/* 进度条 下*/
+.back-to-top {
+    cursor: pointer;
+    opacity: 0.8;
+    z-index: 1300;
+
+    background: #222;
+    color: #fff;
+    position: fixed;
+    left: auto;
+    right: 20px;
+    bottom:-100px;
+    font-size: 12px;
+    padding: 0 6px;
+
+    transition: bottom 0.2s ease-in-out 0s;
+}
+.back-to-top:hover{
+    color:#87daff;
+}
+.back-to-on{
+    bottom: 19px;
+}
+/* 底栏盒子 */
+.boke-bottom{
+    background: #f5f5f5;
+    color: #666;
+    font-size: 0.9em;
+    padding: 10px 0;
+    width: 100%;
+}
+/* 底栏的内容 */
+.boke-bottom-content
+{
+    text-align: left;
+    margin: 0 auto;
+    width: 700px;
+}
+/* 博客内容盒子 */
+.boke-main{
+    margin-top: 80px;
+}
+.boke-box{
+    margin: 0 auto;
+    width: 700px;
+    margin-bottom: 80px;
+}
+
+/* 用户信息按钮 */
+.sidebar-toggle {
+  background: #222;
+  bottom: 45px;
+  cursor: pointer;
+  height: 14px;
+  left: auto;
+  right: 20px;
+  padding: 5px;
+  position: fixed;
+  width: 14px;
+  z-index: 1300;
+  opacity: 0.8;
+}
+.toggle {
+  line-height: 0;
+}
+.toggle .toggle-line {
+  background: #fff;
+  display: inline-block;
+  height: 2px;
+  left: 0;
+  position: relative;
+  top: 0;
+  transition: all 0.4s;
+  vertical-align: top;
+  width: 100%;
+}
+.toggle:hover .toggle-line{
+    background:#87daff;
+}
+.toggle .toggle-line:not(:first-child) {
+  margin-top: 3px;
+}
+/* 鼠标移到图标后，图标的变化 */
+.toggle.toggle-arrow .toggle-line-first {
+  top: 2px;
+  transform: rotate(-45deg);
+  width: 50%;
+}
+.toggle.toggle-arrow .toggle-line-middle {
+  width: 90%;
+}
+.toggle.toggle-arrow .toggle-line-last {
+  top: -2px;
+  transform: rotate(45deg);
+  width: 50%;
+}
+/* 鼠标点击图标后，图标的变化 */
+.toggle.toggle-close .toggle-line-first {
+  top: 5px;
+  transform: rotate(-45deg);
+}
+.toggle.toggle-close .toggle-line-middle {
+  opacity: 0;
+}
+.toggle.toggle-close .toggle-line-last {
+  top: -5px;
+  transform: rotate(45deg);
+}
+
+/* sidebar */
+/* 总的sidebar布局 */
+.boke-sidebar
+{
+    position: fixed;
+    right: -320px;
+    top: 0;
+    height: 100%;
+    width: 320px;
+    margin-left: auto;
+    transition: 0.4s;
+    background: #222;
+    z-index: 1200;
+
+}
+.boke-sidebar-active
+{
+    right: 0;
+}
+.boke-sidebar-active-body
+{
+    margin-right: 320px;
+}
+/* sidebar的用户信息 */
+.sidebar-inner
+{
+    color: #999;
+    padding: 20px 10px;
+    text-align: center;
+}
+/* sidebar的用户图标 */
+.auther-icon
+{
+    margin: 0 auto;
+    max-width:96px;
+    border-radius: 10px;
+    padding: 1px;
+}
+/* sidebar的用户名字 */
+.auther-name
+{
+    display: block;
+    color: #F5F5F5;
+    margin:5px 0 0;
+}
+/* sidebar的用户描述 */
+.auther-description
+{
+    color: #999;
+    font-size: 1em;
+    margin-top: 5px;
+}
+/* 中间的分类和统计 */
+.sidebar-census nav
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+.sidebar-census nav li
+{
+    display: block;
+    padding: 0 15px;
+}
+.sidebar-census nav li:not(:first-child)
+{
+    border-left: 1px solid #333;
+}
+.items-count
+{
+    display: block;
+    font-size: 1.25em;
+    font-weight: 600;
+    text-align: center;
+}
+.items-name
+{
+    font-size: 0.875em;
+}
+/* sidebar的所有a标签的基本样式 */
+.boke-sidebar a
+{
+    color: #999;
+}
+.boke-sidebar a:hover
+{
+    color: #fff;
+}
+/* RSS的a标签 */
+.feed-link
+{
+    margin-top: 15px;
+}
+.feed-link a
+{
+    border: 1px solid #fc6423;
+    border-radius: 4px;
+    color: #fc6423;
+    display: inline-block;
+    padding: 0 15px;
+}
+/* 最下面的作者其他链接的盒子 */
+.sidebar-auther-link
+{
+    margin-top: 15px;
+}
+.sidebar-auther-link a
+{
+    display: inline-block;
+    margin: 0 10px 10px 0;
+    vertical-align: middle;
+    font-size: 0.8125em;
+    border-bottom: 1px solid #999;
+}
+.sidebar-auther-link a::before
+{
+    background: #526b67;
+    border-radius: 50%;
+    content: ' ';
+    display: inline-block;
+    height: 4px;
+    margin-right: 3px;
+    vertical-align: middle;
+    width: 4px;
+}
+.sidebar-auther-link a:hover
+{
+    border-color:#fff;
+}
